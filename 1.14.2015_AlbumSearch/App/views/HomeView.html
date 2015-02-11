@@ -1,0 +1,49 @@
+﻿<div class="row clearfix" ng-controller="SearchController">
+    <div class="col-md-12">
+        <p>Enter Values For Search</p>
+        <input type="text" ng-model="search.Title" placeholder="Enter Song Title For Search" />
+        <input type="text" ng-model="search.Artist" placeholder="Enter Song Artist For Search" />
+        <input type="text" ng-model="search.Album" placeholder="Enter Song Album For Search" />
+        <select ng-model="search.Genre">
+            <option ng-repeat="genre in genres" value="{{genre.Name}}">{{genre.Name}}</option>
+        </select>
+        <button ng-click="searching=true; searchSongs(search)">Search For Songs</button>
+        <button ng-show="searching" ng-click="searching=false">Back To Songs</button>
+
+        <div ng-show="!searching">
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th>Song Title</th>
+                    <th>Artist</th>
+                    <th>Album</th>
+                    <th>Art</th>
+                </tr>
+                <tr ng-repeat="song in songs">
+                    <td>{{song.Title}}</td>
+                    <td>{{song.Artist}}</td>
+                    <td>{{song.Album}}</td>
+                    <td><img src={{song.AlbumArt}} height=75 width=75 /></td>
+                </tr>
+            </table>
+        </div>
+
+
+        <div ng-show="searching">
+            <h2>Search Results</h2>
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th>Song Title</th>
+                    <th>Artist</th>
+                    <th>Album</th>
+                    <th>Art</th>
+                </tr>
+                <tr ng-repeat="searchResult in searchResults">
+                    <td>{{searchResult.Title}}</td>
+                    <td>{{searchResult.Artist}}</td>
+                    <td>{{searchResult.Album}}</td>
+                    <td><img src={{searchResult.AlbumArt}} height=75 width=75 /></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

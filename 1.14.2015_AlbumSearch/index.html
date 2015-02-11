@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="searchApp">
+<head>
+    <title></title>
+    <link href="Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Search My Music</h1>
+            <p class="lead">See what you can find!</p>
+        </div>
+        <div class="row clearfix">
+            <div class="col-sm-12">
+                <ul class="nav nav-pills">
+                    <li role="presentation" class="active"><a href="#/home">Home</a></li>
+                    <li role="presentation"><a href="#/editsongs">Edit Songs</a></li>
+                    <li role="presentation"><a href="#/genres">Genres</a></li>
+                </ul>
+
+            </div>
+        </div>
+
+        <div class="row clearfix" ng-controller="SearchController">
+ 
+
+                <div ng-view=""> </div>
+            </div>
+</div>
+        </div>
+        <script src="Scripts/angular.js"></script>
+        <script src="Scripts/angular-route.js"></script>
+        <script src="Scripts/jquery-2.1.3.js"></script>
+        <script src="Scripts/bootstrap.js"></script>
+
+        <script src="App/App.js"></script>
+        <script src="App/controllers/SearchController.js"></script>
+        <script src="App/services/SearchService.js"></script>
+
+</body>
+</html>
