@@ -1,4 +1,4 @@
-﻿var searchApp = angular.module('searchApp', ['ngRoute']);
+﻿var searchApp = angular.module('searchApp', ['ngTable', 'ngRoute']);
 
 searchApp.config(function ($routeProvider, $httpProvider) {
 

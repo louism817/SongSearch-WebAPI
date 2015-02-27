@@ -1,29 +1,110 @@
 ﻿<div class="row clearfix" ng-controller="SearchController">
-    <div class="col-md-12">
-        <p>Enter Values For Search</p>
-        <input type="text" ng-model="search.Title" placeholder="Enter Song Title For Search" />
-        <input type="text" ng-model="search.Artist" placeholder="Enter Song Artist For Search" />
-        <input type="text" ng-model="search.Album" placeholder="Enter Song Album For Search" />
-        <select ng-model="search.Genre">
-            <option ng-repeat="genre in genres" value="{{genre.Name}}">{{genre.Name}}</option>
-        </select>
-        <button ng-click="searching=true; searchSongs(search)">Search For Songs</button>
-        <button ng-show="searching" ng-click="searching=false">Back To Songs</button>
+    <div class="col-xs-12">
+        <div style="margin: 15px; padding:15px; background-color:#f9f9f9;">
+            <center><h3>Enter Values For Search</h3></center>
+            <form class="form-inline" role="form" style="margin-top: 15px; margin-bottom: 15px;">
+                <center>
+                    <div class="form-group">
+                        <label class="sr-only" for="title">Song Title</label>
+                        <input type="text" class="form-control" id="title" ng-model="search.Title" placeholder="Enter Song Title For Search" size="25" />
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="artist">Artist</label>
+                        <input type="text" class="form-control" id="artist" ng-model="search.Artist" placeholder="Enter Song Artist For Search" size="25" />
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="album">Album</label>
+                        <input type="text" class="form-control" id="album" ng-model="search.Album" placeholder="Enter Song Album For Search" size="25" />
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="genre">Genre</label>
+                        <select class="form-control" ng-model="search.Genre" id="genre" placeholder="-- Select Genre --">
+                            <option ng-repeat="genre in genres" value="{{genre.Name}}">{{genre.Name}}</option>
+                        </select>
+                    </div><br />
+                </center>
+                <center>
+                    <hr />
+                    <button class="btn btn-default" ng-click="searching=true; searchSongs(search)">Search For Songs</button>
+                    <button class="btn btn-default" ng-show="searching" ng-click="searching=false">Back To Songs</button>
+                </center>                
+            </form>
+        </div>
 
         <div ng-show="!searching">
-            <table class="table table-bordered table-striped">
-                <tr>
-                    <th>Song Title</th>
-                    <th>Artist</th>
-                    <th>Album</th>
-                    <th>Art</th>
-                </tr>
+            <h2>Songs</h2>
+            <table ng-table="tableParams" class="table table-bordered table-striped table-condensed">
+                <!--
+            <tr>
+                <th>Song Title</th>
+                <th>Artist</th>
+                <th>Album</th>
+                <th>Art</th>
+            </tr>
+                -->
+
                 <tr ng-repeat="song in songs">
-                    <td>{{song.Title}}</td>
-                    <td>{{song.Artist}}</td>
-                    <td>{{song.Album}}</td>
-                    <td><img src={{song.AlbumArt}} height=75 width=75 /></td>
+                    <td data-title="'Song Title'" sortable="'Title'">
+                        <span ng-hide="editing">
+                            {{song.Title}}
+                        </span>
+                        <input type="text" ng-model="song.Title" ng-hide="!editing" />
+                    </td>
+                    <td data-title="'Artist'" sortable="'Artist'">
+                        <span ng-hide="editing">
+                            {{song.Artist}}
+                        </span>
+                        <input type="text" ng-model="song.Artist" ng-hide="!editing" />
+                    </td>
+                    <td data-title="'Album'" sortable="'Album'">
+                        <span ng-hide="editing">
+                            {{song.Album}}
+                        </span>
+                        <input type="text" ng-model="song.Album" ng-hide="!editing" />
+                    </td>
+                    <td data-title="'Genre'" sortable="'GenreName'">
+                        <span ng-hide="editing">
+                            {{song.GenreName}}
+                        </span>
+                        <span ng-hide ="!editing">
+                            <select ng-model="song.GenreId">
+                                <option ng-repeat="genre in genres" value="{{genre.GenreId}}">{{genre.Name}}</option>
+                            </select><br />
+                        </span>
+                        <input type="text" ng-model="song.GenreName" ng-hide="!editing" readonly/>
+                    </td>
+                    <td>
+                        <center>
+                            <span ng-hide="editing">
+                                <img src={{song.AlbumArt}} height=75 width=75 />
+                            </span>
+                            <div ng-hide="!editing">
+                                <label for="albumArt">Album Art URL</label>
+                                <input id="albumArt" type="text" ng-model="song.AlbumArt" />
+                            </div>
+                            
+                        </center>
+                    </td>
+                    <td>
+                        <button ng-click="editing=true" ng-hide="editing">Edit/Delete</button>
+                        <button ng-click="deleteSong(song)" ng-hide="!editing">Delete</button>
+                        <button ng-click="editing=false; updateSong(song)" ng-hide="!editing">Save</button>
+                        <button ng-click="editing=false" ng-hide="!editing">Cancel</button>
+                    </td>
                 </tr>
+
+
+
+
+<!--
+                <tr ng-repeat="song in songs">
+                    <td data-title="'Song Title'" sortable="'Title'">{{song.Title}}</td>
+                    <td data-title="'Artist'" sortable="'Artist'">{{song.Artist}}</td>
+                    <td data-title="'Album'" sortable="'Album'">{{song.Album}}</td>
+                    <td data-title="'Genre'">{{song.GenreName}}</td>
+                    <td data-title="'Art'"><center><img src={{song.AlbumArt}} height=75 width=75 /></center></td>
+                </tr>
+-->
             </table>
         </div>
 

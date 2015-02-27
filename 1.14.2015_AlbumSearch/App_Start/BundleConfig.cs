@@ -8,6 +8,17 @@ namespace _1._14._2015_AlbumSearch
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+
+            bundles.Add(new ScriptBundle("~/bundles/angular").Include(
+                        "~/Scripts/angular.js",
+                        "~/Scripts/ng-table.js",
+                        "~/Scripts/angular-route.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/music").Include(
+                        "~/App/App.js",
+                        "~/App/services/SearchService.js",
+                        "~/App/controllers/SearchController.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
@@ -21,7 +32,9 @@ namespace _1._14._2015_AlbumSearch
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Content/bootstrap-theme.css",
                       "~/Content/bootstrap.css",
+                      "~/Content/ng-table.css",
                       "~/Content/site.css"));
         }
     }

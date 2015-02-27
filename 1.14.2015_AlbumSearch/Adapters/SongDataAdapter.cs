@@ -25,6 +25,18 @@ namespace _1._14._2015_AlbumSearch.Adapters
                     SongId = s.SongId,
                     Title = s.Title
                 }).ToList();
+                // now see if there is a genre associated with the song
+
+                SongGenre songGenre = null;
+                foreach(SongViewModel song in models)
+                {
+                    songGenre = db.SongGenres.FirstOrDefault(sg => sg.SongId == song.SongId);
+                    if(songGenre != null)
+                    {
+                        song.GenreId = songGenre.GenreId;
+                        song.GenreName = songGenre.Genre.Name;
+                    }
+                }
             }
             return models;
         }
@@ -66,11 +78,31 @@ namespace _1._14._2015_AlbumSearch.Adapters
             {
                  
                 Song song = db.Songs.FirstOrDefault(s => s.SongId == model.SongId);
+                SongGenre songGenre = db.SongGenres.FirstOrDefault(sg => sg.SongId == model.SongId);
 
                 song.Title = model.Title;
                 song.Album = model.Album;
                 song.AlbumArt = model.AlbumArt;
                 song.Artist = model.Artist;
+                // for now, we only allow one genre per song. Keep SongGenre table to allow for future multiple genres
+                // if song is SongGenre table, and the model has a song genre, update genre
+                if(songGenre != null && model.GenreId >= 1)
+                {
+                    if(songGenre.GenreId != model.GenreId)
+                    {
+                        songGenre.GenreId = model.GenreId;
+                    }
+                }
+                // if sonGenre == null song is not in the SongGenre table, add it
+                else if(songGenre == null)
+                {
+                   db.SongGenres.AddOrUpdate(sg => new { sg.SongId, sg.GenreId },
+                   new SongGenre
+                   {
+                       GenreId = model.GenreId,
+                       SongId = model.SongId
+                   });
+                 }
 
                 db.SaveChanges();
             }

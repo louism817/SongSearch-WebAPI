@@ -26,7 +26,8 @@ namespace _1._14._2015_AlbumSearch.Models
         public string Artist { get; set; }
         public string Album { get; set; }
         public string AlbumArt { get; set; }
-        public int GenreId { get; set; } // song is set with a genre and more can be added
+        public int GenreId { get; set; } // song is set with a genre  - more can be added later
+        public string GenreName { get; set; }
     }
 
     public class SearchViewModel
