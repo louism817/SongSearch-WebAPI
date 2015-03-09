@@ -171,9 +171,7 @@ searchApp.factory('SearchService', function ($http, $q) {
     var searchSongs = function (search) {
         var deferred = $q.defer();
         var path = "api/Search?artist=" + search.Artist + "&title=" + search.Title + "&album=" + search.Album + "&genre=" + search.Genre + "";
-        //if (search.Artist || search.Title || search.Genre || search.Album) {
-        //    path = + "?";
-        //}
+
         $http.get(path).success(function (data) {
             searchedSongs.length = 0;
             for (var s in data) {

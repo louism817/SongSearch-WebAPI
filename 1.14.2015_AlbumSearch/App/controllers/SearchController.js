@@ -50,21 +50,7 @@
                     $defer.resolve($scope.songs);
                 }
 
-                //getData: function ($defer, params) {
-                //var orderedSongs = params.sorting() ?
-                //                    $filter('orderBy')($scope.allSongs, params.orderBy()) : $scope.allSongs;
-
-                //$defer.resolve($scope.songs = orderedSongs.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-                //}
-
-
-
-                //total: $scope.allSongs.length, // number of songs
-                //counts: [1, 2, 3],
-                //getData: function ($defer, params) {
-                //    $defer.resolve($scope.songs = $scope.allSongs.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-                //}
-            });
+             });
  
         }, function () { });
     }

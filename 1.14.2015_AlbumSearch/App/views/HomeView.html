@@ -34,16 +34,7 @@
         <div ng-show="!searching">
             <h2>Songs</h2>
             <table ng-table="tableParams" class="table table-bordered table-striped table-condensed">
-                <!--
-            <tr>
-                <th>Song Title</th>
-                <th>Artist</th>
-                <th>Album</th>
-                <th>Art</th>
-            </tr>
-                -->
-
-                <tr ng-repeat="song in songs">
+                 <tr ng-repeat="song in songs">
                     <td data-title="'Song Title'" sortable="'Title'">
                         <span ng-hide="editing">
                             {{song.Title}}
@@ -92,19 +83,6 @@
                         <button ng-click="editing=false" ng-hide="!editing">Cancel</button>
                     </td>
                 </tr>
-
-
-
-
-<!--
-                <tr ng-repeat="song in songs">
-                    <td data-title="'Song Title'" sortable="'Title'">{{song.Title}}</td>
-                    <td data-title="'Artist'" sortable="'Artist'">{{song.Artist}}</td>
-                    <td data-title="'Album'" sortable="'Album'">{{song.Album}}</td>
-                    <td data-title="'Genre'">{{song.GenreName}}</td>
-                    <td data-title="'Art'"><center><img src={{song.AlbumArt}} height=75 width=75 /></center></td>
-                </tr>
--->
             </table>
         </div>
 
